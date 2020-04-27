@@ -46,15 +46,6 @@ Edit `/etc/netdata/health_alarm_notify.conf` by running `/etc/netdata/edit-confi
 
 -  **recipients** per **role** per **notification method**
 
-```sh
-grep sysadmin /etc/netdata/health_alarm_notify.conf
-
-role_recipients_email[sysadmin]="${DEFAULT_RECIPIENT_EMAIL}"
-role_recipients_pushover[sysadmin]="${DEFAULT_RECIPIENT_PUSHOVER}"
-role_recipients_pushbullet[sysadmin]="${DEFAULT_RECIPIENT_PUSHBULLET}"
-role_recipients_telegram[sysadmin]="${DEFAULT_RECIPIENT_TELEGRAM}"
-role_recipients_slack[sysadmin]="${DEFAULT_RECIPIENT_SLACK}"
-...
 ```
 
 ## Testing Notifications
@@ -65,14 +56,10 @@ You can run the following command by hand, to test alarms configuration:
 # become user netdata
 su -s /bin/bash netdata
 
-# enable debugging info on the console
+# disable debugging info on the console
 export NETDATA_ALARM_NOTIFY_DEBUG=1
 
-# send test alarms to sysadmin
-/usr/libexec/netdata/plugins.d/alarm-notify.sh test
-
-# send test alarms to any role
-/usr/libexec/netdata/plugins.d/alarm-notify.sh test "ROLE"
+# send test alarms to sysadmin-notify.sh test "ROLE"
 ```
 
 Note that in versions before 1.16, the plugins.d directory may be installed in a different location in certain OSs (e.g. under `/usr/lib/netdata`). You can always find the location of the alarm-notify.sh script in `netdata.conf`.
